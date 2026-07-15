@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// DATABASE_URL sẽ được lấy từ dịch vụ Cloud (Supabase/Render)
+// Sử dụng CONNECTION_STRING từ môi trường (Supabase/Render)
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
@@ -22,6 +22,7 @@ async function initializeDatabase() {
                 citizen TEXT NOT NULL,
                 procedure TEXT NOT NULL,
                 dept TEXT NOT NULL,
+                field TEXT NOT NULL,
                 created_at TEXT NOT NULL,
                 deadline_date TEXT NOT NULL,
                 officer TEXT NOT NULL,
@@ -47,34 +48,12 @@ app.get('/api/dossiers', async (req, res) => {
 });
 
 app.post('/api/dossiers', async (req, res) => {
-    const { id, citizen, procedure, dept, created_at, deadline_date, officer, deadline_hours } = req.body;
+    const { id, citizen, procedure, dept, field, created_at, deadline_date, officer, deadline_hours } = req.body;
     try {
         await pool.query(
-            'INSERT INTO dossiers (id, citizen, procedure, dept, created_at, deadline_date, officer, deadline_hours, status, step) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-            [id, citizen, procedure, dept, created_at, deadline_date, officer, deadline_hours, "Đang xử lý (Chuyên môn)", 2]
+            'INSERT INTO dossiers (id, citizen, procedure, dept, field, created_at, deadline_date, officer, deadline_hours, status, step) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+            [id, citizen, procedure, dept, field, created_at, deadline_date, officer, deadline_hours, "Đang xử lý (Chuyên môn)", 2]
         );
-        res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-app.post('/api/dossiers/delete', async (req, res) => {
-    const { id } = req.body;
-    try {
-        await pool.query('DELETE FROM dossiers WHERE id = $1', [id]);
-        res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-app.post('/api/dossiers/forward', async (req, res) => {
-    const { id, currentStep } = req.body;
-    const nextStep = currentStep + 1;
-    const newStatus = nextStep === 3 ? "Chờ Lãnh đạo duyệt" : "Đã hoàn thành";
-    try {
-        await pool.query('UPDATE dossiers SET step = $1, status = $2 WHERE id = $3', [nextStep, newStatus, id]);
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
