@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Giám sát TTHC UBND Xã - Mô hình 2 Cấp</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Premium Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SheetJS for processing Excel uploads and downloads client-side -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>Hệ thống Giám sát TTHC UBND Xã Cát Ngạn</title>
     
+    <!-- Tailwind CSS for modern interactive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for beautiful admin icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SheetJS CDN for high-speed Excel Parsing and generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
         }
-        /* Custom scrollbars */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -50,21 +50,21 @@
                         <i class="fa-solid fa-landmark text-emerald-800 text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl md:text-2xl font-bold tracking-tight">HỆ THỐNG GIÁM SÁT HỒ SƠ TTHC</h1>
-                        <p class="text-xs md:text-sm text-emerald-200 font-medium">UBND Xã Cát Ngạn - Mô hình chính quyền 2 cấp huyện Thanh Chương (Cập nhật 2026)</p>
+                        <h1 class="text-xl md:text-2xl font-bold tracking-tight">HỆ THỐNG GIÁM SÁT HỒ SƠ TTHC NỘI BỘ</h1>
+                        <p class="text-xs md:text-sm text-emerald-200 font-medium">UBND Xã Cát Ngạn - Quy trình giải quyết liên thông 2 cấp huyện Thanh Chương (Cập nhật 2026)</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-2 items-center justify-end">
-                    <!-- Backup & Restore Database Buttons for $0 cost architecture -->
+                    <!-- Backup & Restore Database Buttons -->
                     <button onclick="exportDatabase()" class="bg-emerald-700 hover:bg-emerald-600 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm">
-                        <i class="fa-solid fa-file-export"></i> Xuất Dữ Liệu (Backup JSON)
+                        <i class="fa-solid fa-file-export"></i> Xuất Backup (JSON)
                     </button>
                     <label class="bg-emerald-700 hover:bg-emerald-600 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer">
                         <i class="fa-solid fa-file-import"></i> Nhập Bản Sao Lưu
                         <input type="file" id="importFile" accept=".json" onchange="importDatabase(event)" class="hidden">
                     </label>
                     <button onclick="resetToMockData()" class="bg-red-700 hover:bg-red-600 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm" title="Khôi phục dữ liệu mẫu thử nghiệm">
-                        <i class="fa-solid fa-rotate-left"></i> Reset Mẫu
+                        <i class="fa-solid fa-rotate-left"></i> Khôi Phục Mẫu
                     </button>
                 </div>
             </div>
@@ -139,12 +139,12 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
-                    <input type="text" id="searchQuery" oninput="applyFilters()" placeholder="Tìm theo mã hồ sơ, tên công dân, thủ tục..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+                    <input type="text" id="searchQuery" oninput="applyFilters()" placeholder="Tìm theo mã hồ sơ, tên công dân, thủ tục, SĐT..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                 </div>
-                <!-- Department filter (Split Room & Office) -->
+                <!-- Department filter -->
                 <div class="w-full sm:w-72">
-                    <select id="filterDept" onchange="applyFilters()" class="w-full py-2 px-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
-                        <option value="">-- Tất cả cơ quan/bộ phận --</option>
+                    <select id="filterDept" onchange="applyFilters()" class="w-full py-2 px-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                        <option value="">-- Tất cả cơ quan chủ trì --</option>
                         <option value="Phòng Kinh tế">Phòng Kinh tế (Huyện)</option>
                         <option value="Văn phòng Đất đai Thanh Chương">Văn phòng Đất đai Thanh Chương (Huyện)</option>
                         <option value="Văn phòng HĐND - UBND">Văn phòng HĐND - UBND (Xã)</option>
@@ -153,30 +153,27 @@
                 </div>
                 <!-- Status filter -->
                 <div class="w-full sm:w-48">
-                    <select id="filterStatus" onchange="applyFilters()" class="w-full py-2 px-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+                    <select id="filterStatus" onchange="applyFilters()" class="w-full py-2 px-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                         <option value="">-- Tất cả trạng thái --</option>
-                        <option value="processing">Đang trong hạn</option>
-                        <option value="duesoon">Sắp trễ hạn</option>
-                        <option value="overdue">Quá hạn xử lý</option>
-                        <option value="completed">Đã có kết quả</option>
+                        <option value="processing">Đang giải quyết</option>
+                        <option value="duesoon">Sắp trễ hạn (≤ 2 ngày)</option>
+                        <option value="overdue">Đã quá hạn 🔴</option>
+                        <option value="completed">Đã hoàn thành</option>
                     </select>
                 </div>
             </div>
 
             <!-- Priority & Create Actions -->
             <div class="flex flex-wrap gap-2 items-center">
-                <!-- Checkbox for priority: Land focus -->
                 <label class="flex items-center gap-2 cursor-pointer bg-amber-50 border border-amber-200 px-3 py-2 rounded-lg text-xs font-semibold text-amber-800 hover:bg-amber-100 transition-colors">
                     <input type="checkbox" id="filterLandPriority" onchange="applyFilters()" class="rounded text-amber-600 focus:ring-amber-500 h-4 w-4">
                     <span><i class="fa-solid fa-map-location-dot text-amber-600"></i> GIÁM SÁT ĐẤT ĐAI</span>
                 </label>
                 
-                <!-- NEW BULK EXCEL IMPORT ACTION BUTTON -->
                 <button onclick="openExcelModal()" class="bg-indigo-700 hover:bg-indigo-800 text-white px-3.5 py-2 rounded-lg font-semibold text-sm flex items-center gap-1.5 shadow-md transition-all">
                     <i class="fa-solid fa-file-excel"></i> Nhập từ Excel
                 </button>
 
-                <!-- Add New Record Button -->
                 <button onclick="openFormModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-1.5 shadow-md transition-all">
                     <i class="fa-solid fa-plus-circle"></i> Tiếp Nhận Hồ Sơ Mới
                 </button>
@@ -188,7 +185,7 @@
             <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center flex-wrap gap-2">
                 <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                     <i class="fa-solid fa-table-list text-emerald-700"></i>
-                    BẢNG THEO DÕI GIÁM SÁT TIẾN ĐỘ CHI TIẾT
+                    BẢNG THEO DÕI GIÁM SÁT TIẾN ĐỘ & QUY TRÌNH NỘI BỘ
                     <span id="filteredCount" class="bg-slate-200 text-slate-700 text-xs px-2.5 py-0.5 rounded-full">0/0 hồ sơ</span>
                 </h3>
                 <div class="text-xs text-slate-500 flex items-center gap-4">
@@ -204,10 +201,10 @@
                         <tr class="bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
                             <th class="py-3.5 px-4 w-28">Mã Hồ Sơ</th>
                             <th class="py-3.5 px-4">TTHC & Lĩnh Vực</th>
-                            <th class="py-3.5 px-4">Thông Tin Công Dân / Tiếp Nhận</th>
+                            <th class="py-3.5 px-4">Công Dân / Cán Bộ Nhận</th>
                             <th class="py-3.5 px-4 w-32">Ngày Tiếp Nhận</th>
                             <th class="py-3.5 px-4 w-32">Hạn Trả Kết Quả</th>
-                            <th class="py-3.5 px-4">Đơn Vị Chủ Trì / Tiến Độ</th>
+                            <th class="py-3.5 px-4">Bước Nội Bộ Hiện Tại</th>
                             <th class="py-3.5 px-4 w-28 text-center">Hành Động</th>
                         </tr>
                     </thead>
@@ -230,108 +227,94 @@
     <!-- MODAL 1: FORM TO ADD/EDIT RECORD -->
     <div id="formModal" class="fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300" id="formModalContainer">
-            <!-- Modal Header -->
             <div class="bg-emerald-800 text-white px-6 py-4 rounded-t-2xl flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2" id="formModalTitle">
-                    <i class="fa-solid fa-file-circle-plus"></i> Tiếp Nhận Hồ Sơ Mới (Trung tâm PVHCC xã)
+                    <i class="fa-solid fa-file-circle-plus"></i> Tiếp Nhận Hồ Sơ Mới
                 </h3>
                 <button onclick="closeFormModal()" class="text-white hover:text-slate-200 transition-colors">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
-            <!-- Modal Form -->
+            
             <form id="recordForm" onsubmit="saveRecord(event)" class="p-6 space-y-4">
                 <input type="hidden" id="editRecordId">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- File Code -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Mã Hồ Sơ <span class="text-red-500">*</span></label>
                         <input type="text" id="formCode" required placeholder="Ví dụ: HS-2026-0001" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm font-semibold">
                     </div>
-                    <!-- Citizen Name -->
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tên Người Nộp (Công dân) <span class="text-red-500">*</span></label>
+                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Họ Tên Công Dân <span class="text-red-500">*</span></label>
                         <input type="text" id="formCitizen" required placeholder="Ví dụ: Nguyễn Văn A" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Lĩnh vực Selector -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Lĩnh Vực <span class="text-red-500">*</span></label>
                         <select id="formField" required onchange="onFieldChange()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
                             <option value="">-- Chọn lĩnh vực --</option>
-                            <option value="Đất Đai">Đất Đai (Phòng Kinh tế / VP Đất đai)</option>
-                            <option value="Hộ tịch">Hộ tịch (Tư pháp xã)</option>
-                            <option value="Chứng thực">Chứng thực (Tư pháp xã)</option>
-                            <option value="Bảo trợ xã hội">Bảo trợ xã hội (Phòng VH-XH)</option>
-                            <option value="Người có công">Người có công (Phòng VH-XH)</option>
-                            <option value="Khác">Lĩnh vực Khác / Hộ Kinh doanh / Kinh tế</option>
+                            <option value="Đất Đai">Đất Đai</option>
+                            <option value="Hộ tịch">Hộ tịch</option>
+                            <option value="Chứng thực">Chứng thực</option>
+                            <option value="Bảo trợ xã hội">Bảo trợ xã hội</option>
+                            <option value="Người có công">Người có công</option>
+                            <option value="Khác">Lĩnh vực Khác</option>
                         </select>
                     </div>
-                    <!-- Đơn vị phụ trách (Auto-filled / Adjusted by selected procedure) -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Cơ quan / Bộ phận chủ trì <span class="text-red-500">*</span></label>
-                        <input type="text" id="formDept" required readonly class="w-full px-3.5 py-2 border border-slate-100 bg-slate-50 text-slate-600 font-semibold rounded-lg focus:outline-none text-sm" placeholder="Hệ thống tự động xác định">
+                        <input type="text" id="formDept" required readonly class="w-full px-3.5 py-2 border border-slate-100 bg-slate-50 text-slate-600 font-semibold rounded-lg focus:outline-none text-sm" placeholder="Tự động xác định">
                     </div>
                 </div>
 
-                <!-- TTHC Template selector -->
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tên Thủ Tục Hành Chính (Chuẩn Hóa Danh Mục) <span class="text-red-500">*</span></label>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tên Thủ Tục Hành Chính (Chuẩn Hóa) <span class="text-red-500">*</span></label>
                     <select id="formTthc" required onchange="onTthcChange()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-xs">
                         <option value="">-- Vui lòng chọn lĩnh vực trước --</option>
                     </select>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Date Received -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Ngày Tiếp Nhận <span class="text-red-500">*</span></label>
-                        <input type="date" id="formDateRec" required onchange="calculateDeadline()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
+                        <input type="date" id="formDateRec" required onchange="calculateDeadline()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm">
                     </div>
-                    <!-- Processing duration (Days) -->
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Số ngày giải quyết định mức</label>
-                        <input type="number" id="formDuration" required min="1" oninput="calculateDeadline()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
+                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Số ngày định mức giải quyết</label>
+                        <input type="number" id="formDuration" required min="1" oninput="calculateDeadline()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm">
                     </div>
-                    <!-- Deadline Date (Auto-calculated but editable) -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Hạn Trả Kết Quả</label>
-                        <input type="date" id="formDeadline" required class="w-full px-3.5 py-2 border border-emerald-300 bg-emerald-50 font-semibold text-emerald-800 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
+                        <input type="date" id="formDeadline" required class="w-full px-3.5 py-2 border border-emerald-300 bg-emerald-50 font-semibold text-emerald-800 rounded-lg focus:outline-none text-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Citizen Phone (Optional) -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Số Điện Thoại Công Dân</label>
-                        <input type="text" id="formPhone" placeholder="Ví dụ: 0912345xxx" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
+                        <input type="text" id="formPhone" placeholder="Ví dụ: 0912345xxx" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm">
                     </div>
-                    <!-- Receiving Officer Name -->
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Công chức trực tiếp nhận <span class="text-red-500">*</span></label>
-                        <input type="text" id="formOfficer" required placeholder="Họ tên công chức Tiếp nhận" class="w-full px-3.5 py-2 border border-emerald-300 bg-emerald-50/50 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm font-semibold text-emerald-900">
+                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Công chức tiếp nhận <span class="text-red-500">*</span></label>
+                        <input type="text" id="formOfficer" required placeholder="Họ tên công chức tiếp nhận" class="w-full px-3.5 py-2 border border-emerald-300 bg-emerald-50/50 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm font-semibold text-emerald-950">
                     </div>
-                    <!-- Current Status -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Trạng Thái Hồ Sơ</label>
-                        <select id="formStatus" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm">
+                        <select id="formStatus" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm">
                             <option value="Đang xử lý">Đang xử lý (Chuyển tiếp/Nội bộ)</option>
                             <option value="Chờ bổ sung">Chờ bổ sung (Tạm ngưng hạn)</option>
-                            <option value="Đã hoàn thành">Đã hoàn thành (Có kết quả trả dân)</option>
+                            <option value="Đã hoàn thành">Đã hoàn thành (Có kết quả)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Notes / First logs for 2-level joint action -->
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Ghi chú ban đầu / Tiến độ chuyển tiếp liên thông</label>
-                    <textarea id="formNotes" placeholder="Ví dụ: Đã gửi hồ sơ giấy qua bộ phận chuyển phát liên thông huyện Thanh Chương." rows="2" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm"></textarea>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Ghi chú tiến trình / Liên thông bước đầu</label>
+                    <textarea id="formNotes" placeholder="Ví dụ: Đã tiếp nhận hồ sơ gốc và tờ khai của công dân." rows="2" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm"></textarea>
                 </div>
 
-                <!-- Action buttons -->
                 <div class="flex justify-end gap-2 pt-4 border-t border-slate-100">
                     <button type="button" onclick="closeFormModal()" class="px-5 py-2 text-slate-500 hover:bg-slate-100 font-semibold rounded-lg text-sm transition-colors">Đóng</button>
                     <button type="submit" class="px-5 py-2 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-lg text-sm shadow-md transition-colors">Lưu Hồ Sơ</button>
@@ -342,11 +325,10 @@
 
     <!-- MODAL 2: VIEW DETAILS & INTERACTION JOURNAL LOG -->
     <div id="detailModal" class="fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300" id="detailModalContainer">
-            <!-- Header -->
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[95vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300" id="detailModalContainer">
             <div class="bg-slate-800 text-white px-6 py-4 rounded-t-2xl flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-blue-400"></i> CHI TIẾT TIẾN TRÌNH GIẢI QUYẾT HỒ SƠ
+                    <i class="fa-solid fa-circle-info text-blue-400"></i> TIẾN TRÌNH VÀ QUY TRÌNH NỘI BỘ CHI TIẾT
                 </h3>
                 <button onclick="closeDetailModal()" class="text-white hover:text-slate-200 transition-colors">
                     <i class="fa-solid fa-xmark text-xl"></i>
@@ -354,7 +336,6 @@
             </div>
             
             <div class="p-6 space-y-6">
-                <!-- Info cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
                         <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider">Thông Tin TTHC</h4>
@@ -367,17 +348,16 @@
                         <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider">Thông Tin Tiến Độ</h4>
                         <div class="text-sm flex items-center gap-2">
                             Mã: <strong id="detailCode" class="text-slate-800">N/A</strong>
-                            <span id="detailPriorityBadge" class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-bold hidden"><i class="fa-solid fa-map-location-dot"></i> Đất đai</span>
+                            <span id="detailPriorityBadge" class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-bold hidden"><i class="fa-solid fa-star"></i> Đất đai</span>
                         </div>
                         <div class="text-xs text-slate-500">Công dân: <strong id="detailCitizen">N/A</strong> <span id="detailPhone" class="font-mono"></span></div>
-                        <div class="text-xs text-slate-500">Tiến độ: <span id="detailStatusBadge"></span></div>
+                        <div class="text-xs text-slate-500">Trạng thái tổng quát: <span id="detailStatusBadge"></span></div>
                         <div class="text-xs text-slate-500 border-t border-slate-200/60 pt-1.5 mt-1.5">
-                            Cán bộ Một cửa tiếp nhận: <strong id="detailOfficer" class="text-emerald-800">N/A</strong>
+                            Công chức Một cửa: <strong id="detailOfficer" class="text-emerald-800">N/A</strong>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dates indicator -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-y border-slate-100 py-4 text-center">
                     <div>
                         <p class="text-xs text-slate-400 font-semibold uppercase">Ngày Tiếp Nhận</p>
@@ -393,9 +373,31 @@
                     </div>
                 </div>
 
-                <!-- Interactive update status for quick processing -->
+                <!-- VISUAL WORKFLOW STEPPER SECTION (QUY TRÌNH NỘI BỘ) -->
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-xs text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-route text-emerald-700"></i> Các Bước Quy Trình Giải Quyết Nội Bộ
+                        </h4>
+                        <span id="workflowSummary" class="text-xs text-slate-500 font-semibold">Bước 1/4</span>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 py-2" id="workflowStepperUI">
+                        <!-- Filled in dynamically -->
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <div class="text-xs text-slate-500">
+                            Bước tiếp theo: <strong class="text-emerald-800" id="nextStepName">Đang cập nhật...</strong>
+                        </div>
+                        <button onclick="advanceWorkflowStep()" id="btnAdvanceStep" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-circle-arrow-right"></i> Chuyển Bước Nội Bộ Tiếp Theo
+                        </button>
+                    </div>
+                </div>
+
                 <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl">
-                    <h4 class="font-bold text-xs text-blue-800 uppercase tracking-wider mb-2"><i class="fa-solid fa-pencil"></i> Cập Nhật Trạng Thái Giải Quyết</h4>
+                    <h4 class="font-bold text-xs text-blue-800 uppercase tracking-wider mb-2"><i class="fa-solid fa-pencil"></i> Thay đổi trạng thái tổng quát</h4>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="updateStatusFromDetail('Đang xử lý')" class="bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold px-3 py-2 rounded-lg transition-colors">
                             <i class="fa-solid fa-circle-notch text-blue-500 animate-spin"></i> Đang xử lý
@@ -404,44 +406,41 @@
                             <i class="fa-solid fa-circle-exclamation text-amber-500"></i> Chờ bổ sung
                         </button>
                         <button onclick="updateStatusFromDetail('Đã hoàn thành')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-colors">
-                            <i class="fa-solid fa-circle-check"></i> Đã Hoàn Thành (Có kết quả)
+                            <i class="fa-solid fa-circle-check"></i> Đã Hoàn Thành
                         </button>
                     </div>
                 </div>
 
-                <!-- JOURNAL PROGRESS SECTION - RESOLVES THE 2-LEVEL DISCREPANCY -->
+                <!-- JOURNAL PROGRESS SECTION -->
                 <div>
-                    <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-3"><i class="fa-solid fa-list-check"></i> Nhật Ký Liên Thông (Tiến trình chuyển tiếp và phản hồi 2 cấp Xã - Huyện)</h4>
+                    <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-3"><i class="fa-solid fa-list-check"></i> Nhật ký tiến độ & Tương tác 2 cấp Xã - Huyện</h4>
                     
-                    <!-- Form to add new timeline log -->
                     <div class="flex gap-2 mb-4">
-                        <input type="text" id="logInput" placeholder="Thêm mô tả mới (ví dụ: Chuyển Văn phòng ĐKĐĐ Thanh Chương thẩm định...)" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:outline-none text-xs">
+                        <input type="text" id="logInput" placeholder="Thêm mô tả mới (ví dụ: Chuyển Phòng Kinh tế Huyện thẩm định...)" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:outline-none text-xs">
                         <button onclick="addJournalLog()" class="bg-slate-700 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-colors">
-                            <i class="fa-solid fa-plus"></i> Ghi Nhận
+                            Ghi Nhận
                         </button>
                     </div>
 
-                    <!-- Log timeline list -->
-                    <div class="border-l-2 border-slate-200 pl-4 py-1 space-y-4 max-h-52 overflow-y-auto" id="journalTimeline">
-                        <!-- Filled in dynamically -->
+                    <div class="border-l-2 border-slate-200 pl-4 py-1 space-y-4 max-h-48 overflow-y-auto" id="journalTimeline">
+                        <!-- Filled dynamically -->
                     </div>
                 </div>
             </div>
-            <!-- Footer -->
+            
             <div class="bg-slate-50 px-6 py-4 rounded-b-2xl border-t border-slate-100 flex justify-end gap-2">
-                <button onclick="editRecordFromDetail()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg text-xs transition-colors"><i class="fa-solid fa-pen"></i> Chỉnh Sửa Hồ Sơ</button>
+                <button onclick="editRecordFromDetail()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg text-xs transition-colors"><i class="fa-solid fa-pen"></i> Chỉnh Sửa</button>
                 <button onclick="closeDetailModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-lg text-xs transition-colors">Đóng</button>
             </div>
         </div>
     </div>
 
-    <!-- NEW MODAL 3: EXCEL BULK IMPORT MODAL -->
+    <!-- MODAL 3: EXCEL BULK IMPORT MODAL -->
     <div id="excelModal" class="fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300" id="excelModalContainer">
-            <!-- Modal Header -->
             <div class="bg-indigo-800 text-white px-6 py-4 rounded-t-2xl flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2">
-                    <i class="fa-solid fa-file-excel"></i> Bộ Công Cụ Nhập Dữ Liệu Excel Hàng Loạt
+                    <i class="fa-solid fa-file-excel"></i> Nhập Dữ Liệu Hồ Sơ Từ Excel Hàng Loạt
                 </h3>
                 <button onclick="closeExcelModal()" class="text-white hover:text-slate-200 transition-colors">
                     <i class="fa-solid fa-xmark text-xl"></i>
@@ -449,62 +448,56 @@
             </div>
             
             <div class="p-6 space-y-4">
-                <!-- Explanations & Template Download link -->
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
                         <h4 class="font-bold text-xs text-indigo-800 uppercase tracking-wider">HƯỚNG DẪN THỰC HIỆN</h4>
                         <p class="text-xs text-slate-600 mt-1 max-w-xl">
-                            Vui lòng sử dụng file Excel mẫu chuẩn được xuất từ hệ thống để đảm bảo trùng khớp cấu trúc cột dữ liệu. Hãy tải file mẫu bên phải, hoàn thiện danh sách hồ sơ rồi tải lên hệ thống.
+                            Vui lòng sử dụng biểu mẫu cấu trúc dữ liệu chuẩn của hệ thống để đồng bộ. Tải file mẫu bên phải, hoàn thiện rồi tải tệp lên.
                         </p>
                     </div>
                     <button onclick="downloadExcelTemplate()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
-                        <i class="fa-solid fa-file-arrow-down"></i> Tải Mẫu Excel Trống (.xlsx)
+                        <i class="fa-solid fa-file-arrow-down"></i> Tải Mẫu Excel Trống
                     </button>
                 </div>
 
-                <!-- Input area for File -->
                 <div class="border-2 border-dashed border-indigo-200 hover:border-indigo-400 bg-indigo-50/20 rounded-xl p-6 text-center cursor-pointer transition-all relative">
-                    <input type="file" id="excelFileInput" accept=".xlsx, .xls, .csv" onchange="handleExcelUpload(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                    <input type="file" id="excelFileInput" accept=".xlsx, .xls" onchange="handleExcelUpload(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                     <div class="text-indigo-600 text-4xl mb-2"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <p class="text-sm font-semibold text-slate-700">Kéo thả hoặc Nhấp chuột để tải File Excel (.xlsx, .xls) của bạn lên</p>
+                    <p class="text-sm font-semibold text-slate-700">Kéo thả hoặc Click để tải tệp Excel (.xlsx) lên</p>
                     <p class="text-xs text-slate-400 mt-1" id="uploadedFileName">Chưa có tệp nào được chọn</p>
                 </div>
 
-                <!-- Append vs Overwrite choice -->
                 <div class="flex items-center gap-4 bg-indigo-50/50 p-3 rounded-lg border border-indigo-100/60">
                     <span class="text-xs font-bold text-slate-700">Phương án nạp dữ liệu:</span>
                     <label class="inline-flex items-center gap-1.5 text-xs text-slate-600 cursor-pointer">
                         <input type="radio" name="importMode" value="append" checked class="text-indigo-600 focus:ring-indigo-500">
-                        <span>Cộng dồn vào danh sách hiện tại</span>
+                        <span>Cộng dồn và cập nhật trùng lắp</span>
                     </label>
                     <label class="inline-flex items-center gap-1.5 text-xs text-slate-600 cursor-pointer">
                         <input type="radio" name="importMode" value="replace" class="text-indigo-600 focus:ring-indigo-500">
-                        <span class="text-red-600 font-medium">Xóa sạch danh sách cũ & ghi đè mới hoàn toàn</span>
+                        <span class="text-red-600 font-medium">Xóa sạch dữ liệu cũ & ghi đè mới</span>
                     </label>
                 </div>
 
-                <!-- Preview Area -->
                 <div class="space-y-2">
-                    <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                        <span><i class="fa-solid fa-list-check"></i> DỮ LIỆU ĐỌC ĐƯỢC TỪ FILE EXCEL (<span id="parsedCount">0</span> dòng)</span>
-                        <span class="text-slate-400 text-[10px] font-normal lowercase">chỉ hiển thị xem trước tối đa 10 dòng đầu</span>
+                    <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider">
+                        <i class="fa-solid fa-list-check"></i> XEM TRƯỚC DỮ LIỆU ĐỌC ĐƯỢC (<span id="parsedCount">0</span> dòng)
                     </h4>
                     
-                    <div class="overflow-x-auto border border-slate-200 rounded-lg max-h-56">
+                    <div class="overflow-x-auto border border-slate-200 rounded-lg max-h-48">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead class="bg-slate-100 text-slate-600 font-bold uppercase sticky top-0">
                                 <tr>
                                     <th class="p-2 border-b border-slate-200">Mã HS</th>
                                     <th class="p-2 border-b border-slate-200">Công dân</th>
                                     <th class="p-2 border-b border-slate-200">Lĩnh vực</th>
-                                    <th class="p-2 border-b border-slate-200">Thủ tục</th>
                                     <th class="p-2 border-b border-slate-200">Hạn Trả</th>
-                                    <th class="p-2 border-b border-slate-200">Công chức nhận</th>
+                                    <th class="p-2 border-b border-slate-200">Cán bộ</th>
                                 </tr>
                             </thead>
                             <tbody id="excelPreviewTableBody" class="divide-y divide-slate-100 text-slate-600">
                                 <tr>
-                                    <td colspan="6" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
+                                    <td colspan="5" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -512,26 +505,25 @@
                 </div>
             </div>
             
-            <!-- Footer -->
             <div class="bg-slate-50 px-6 py-4 rounded-b-2xl border-t border-slate-100 flex justify-end gap-2">
                 <button onclick="closeExcelModal()" class="px-5 py-2 text-slate-500 hover:bg-slate-100 font-semibold rounded-lg text-sm transition-colors">Đóng</button>
                 <button onclick="commitExcelImport()" id="excelCommitBtn" disabled class="px-5 py-2 bg-indigo-700 hover:bg-indigo-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold rounded-lg text-sm shadow-md transition-colors">
-                    <i class="fa-solid fa-circle-check"></i> Xác Nhận Nạp Hồ Sơ Hàng Loạt
+                    Nạp Hồ Sơ Hàng Loạt
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- CUSTOM CONFIRM MODAL (Replaces native blocking confirm) -->
+    <!-- CUSTOM CONFIRM MODAL (Safety, No Browser Blocking) -->
     <div id="confirmModal" class="fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300">
             <div class="text-slate-800 text-base font-bold flex items-center gap-2 mb-3">
-                <i class="fa-solid fa-circle-question text-amber-500 text-lg"></i> XÁC NHẬN HÀNH ĐỘNG
+                <i class="fa-solid fa-circle-question text-amber-500 text-lg"></i> XÁC NHẬN YÊU CẦU
             </div>
             <p id="confirmMessage" class="text-sm text-slate-600 mb-6"></p>
             <div class="flex justify-end gap-2 border-t border-slate-100 pt-3">
-                <button id="confirmCancelBtn" class="px-4 py-2 text-slate-500 hover:bg-slate-100 font-semibold rounded-lg text-xs transition-colors">Hủy bỏ</button>
-                <button id="confirmOkBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs shadow-md transition-colors">Xác nhận</button>
+                <button id="confirmCancelBtn" class="px-4 py-2 text-slate-500 hover:bg-slate-100 font-semibold rounded-lg text-xs transition-colors">Hủy</button>
+                <button id="confirmOkBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs shadow-md transition-colors">Đồng Ý</button>
             </div>
         </div>
     </div>
@@ -539,100 +531,171 @@
     <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-auto border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
-            <p class="font-bold text-slate-300">© 2026 UBND Xã - Phần Mềm Giám Sát TTHC Nội Bộ Độc Lập</p>
-            <p>Hệ thống hỗ trợ đôn đốc Trung tâm Một cửa xã Cát Ngạn, rà soát hồ sơ 2 cấp (Phòng Kinh tế, Văn phòng Đăng ký Đất đai huyện Thanh Chương, Phòng VH-XH).</p>
-            <div class="flex justify-center gap-4 text-[10px] text-slate-500 pt-2">
-                <span>Trình duyệt: Google Chrome, MS Edge</span>
-                <span>•</span>
-                <span>Phương án: Độc lập miễn phí ($0 đồng)</span>
-            </div>
+            <p class="font-bold text-slate-300">© 2026 UBND Xã Cát Ngạn - Phần Mềm Giám Sát TTHC Nội Bộ Độc Lập</p>
+            <p>Hệ thống giám sát cán bộ Một cửa, rà soát hồ sơ 2 cấp (Phòng Kinh tế, Văn phòng Đăng ký Đất đai huyện Thanh Chương, Phòng VH-XH).</p>
         </div>
     </footer>
 
     <script>
-        // Standard template matching both split departments: Phòng Kinh tế & Văn phòng Đất đai Thanh Chương
+        // Auto-detect server presence based on domain host
+        const IS_SERVER_MODE = window.location.hostname !== '' && window.location.protocol.startsWith('http');
+
         const TTHC_TEMPLATES = [
-            // ĐẤT ĐAI (Phòng Kinh tế)
-            { name: "1.012753.000.00.00.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp GCN lần đầu đối với tổ chức đang sử dụng đất", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 20 },
-            { name: "1.013978.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp GCN lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư...", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
-            { name: "1.012796.000.00.00.H41- Đính chính Giấy chứng nhận đã cấp lần đầu có sai sót", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 10 },
-            { name: "1.013952.H41- Điều chỉnh quyết định giao đất, cho thuê đất, chuyển mục đích sử dụng đất do thay đổi căn cứ...", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
-            { name: "1.012817.000.00.00.H41- Xác định lại diện tích đất ở của hộ gia đình, cá nhân đã được cấp GCN trước 01/07/2004", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
-            { name: "1.012818.000.00.00.H41- Thu hồi Giấy chứng nhận đã cấp lần đầu không đúng quy định...", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
+            // PHÒNG KINH TẾ (Đất đai và các lĩnh vực khác)
+            { name: "1.012753.000.00.00.H41 - Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với tổ chức đang sử dụng đất", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 20,
+              workflow: [
+                  { step: 1, name: "Một cửa tiếp nhận hồ sơ", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Kiểm tra thực địa, nguồn gốc sử dụng đất", duration: 5, role: "Công chức Địa chính xã" },
+                  { step: 3, name: "Liên thông Phòng Kinh tế Huyện thẩm định", duration: 12, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "Ký GCN & Gửi trả kết quả", duration: 2, role: "Lãnh đạo UBND xã/Huyện" }
+              ]
+            },
+            { name: "1.013978.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư, người gốc Việt Nam định cư ở nước ngoài", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15,
+              workflow: [
+                  { step: 1, name: "Tiếp nhận hồ sơ, kiểm tra tính hợp lệ", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Thẩm định thực trạng đất đai xã", duration: 7, role: "Công chức Địa chính xã" },
+                  { step: 3, name: "Phòng Kinh tế Huyện phê duyệt", duration: 5, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "Phê duyệt cấp & Trả kết quả", duration: 2, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "1.012796.000.00.00.H41- Đính chính Giấy chứng nhận đã cấp lần đầu có sai sót", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 10,
+              workflow: [
+                  { step: 1, name: "Tiếp nhận đơn đính chính", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Kiểm tra hiện trạng, xác nhận sai lệch", duration: 3, role: "Công chức Địa chính" },
+                  { step: 3, name: "Phòng Kinh tế Huyện đính chính", duration: 4, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "Đóng dấu và trả phôi kết quả", duration: 2, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "1.013952.H41- Điều chỉnh quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất do thay đổi căn cứ quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất; điều chỉnh thời hạn sử dụng đất của dự án đầu tư.", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15,
+              workflow: [
+                  { step: 1, name: "Tiếp nhận đơn đề xuất điều chỉnh", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Thẩm tra lý do và điều kiện pháp lý", duration: 5, role: "Công chức Địa chính" },
+                  { step: 3, name: "Phòng Kinh tế Huyện duyệt điều chỉnh", duration: 7, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "UBND xã ký điều chỉnh bàn giao", duration: 2, role: "Lãnh đạo UBND" }
+              ]
+            },
+            { name: "1.012817.000.00.00.H41 - Xác định lại diện tích đất ở của hộ gia đình, cá nhân đã được cấp Giấy chứng nhận trước ngày 01 tháng 7 năm 2004", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15,
+              workflow: [
+                  { step: 1, name: "Một cửa nhận hồ sơ đề nghị", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Xác minh nguồn gốc và niên hạn sử dụng", duration: 5, role: "Công chức Địa chính" },
+                  { step: 3, name: "Liên thông Phòng Kinh tế Huyện thẩm định lại", duration: 7, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "Duyệt cấp đổi diện tích", duration: 2, role: "UBND Xã" }
+              ]
+            },
+            { name: "1.012818.000.00.00.H41 - Thu hồi Giấy chứng nhận đã cấp lần đầu không đúng quy định của pháp luật đất đai do người sử dụng đất, chủ sở hữu tài sản gắn liền với đất phát hiện và cấp lại Giấy chứng nhận sau khi thu hồi", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15,
+              workflow: [
+                  { step: 1, name: "Một cửa nhận phát hiện/sai lệch", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Thanh tra lập biên bản sai sót", duration: 4, role: "Công chức Địa chính" },
+                  { step: 3, name: "Liên thông Phòng Kinh tế làm thủ tục thu hồi", duration: 8, role: "Phòng Kinh tế Huyện" },
+                  { step: 4, name: "Cấp lại phôi mới đúng quy định", duration: 2, role: "Bộ phận Một cửa" }
+              ]
+            },
             { name: "1.013965.H41- Sử dụng đất kết hợp đa mục đích, gia hạn phương án sử dụng đất kết hợp đa mục đích.", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
-            { name: "1.013949.H41- Giao đất, cho thuê đất, chuyển mục đích sử dụng đất đối với trường hợp không đấu giá...", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 25 },
+            { name: "1.013949.H41-Giao đất, cho thuê đất, chuyển mục đích sử dụng đất...", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 15 },
             { name: "1.012789.000.00.00.H41- Cung cấp thông tin, dữ liệu đất đai.", field: "Đất Đai", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "1.014258.H41- Xác nhận đăng ký thu hồi khoáng sản (cấp xã)", field: "Khác", dept: "Phòng Kinh tế", duration: 10 },
+            { name: "1.014258.H41- Xác nhận đăng ký thu hồi khoáng sản (cấp xã)", field: "Khác", dept: "Phòng Kinh tế", duration: 5 },
+            { name: "1.002759.000.00.00.H41 - Cấp lại, đổi, điều chỉnh thông tin trên sổ BHXH, thẻ BHYT", field: "Khác", dept: "Phòng Kinh tế", duration: 5 },
+            { name: "2.001283.000.00.00.H41- Cấp Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai", field: "Khác", dept: "Phòng Kinh tế", duration: 10 },
+            { name: "1.001612.000.00.00.H41- Đăng ký thành lập hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
+            { name: "2.000720.000.00.00.H41 - Đăng ký thay đổi nội dung đăng ký hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
+            { name: "1.001570.000.00.00.H41- Tạm ngừng kinh doanh, tiếp tục kinh doanh trước thời hạn...", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
+            { name: "2.000575.000.00.00.H41 - Cấp lại Giấy chứng nhận đăng ký hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
+            { name: "1.001266.000.00.00.H41 - Chấm dứt hoạt động hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
+            { name: "2.001827.000.00.00.H41 - Cấp Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm đối với cơ sở sản xuất, kinh doanh thực phẩm nông, lâm, thủy sản", field: "Khác", dept: "Phòng Kinh tế", duration: 15 },
+            { name: "1.013997.H41- Hỗ trợ cơ sở sản xuất bị thiệt hại do dịch bệnh động vật...", field: "Khác", dept: "Phòng Kinh tế", duration: 10 },
 
-            // ĐẤT ĐAI (Văn phòng Đất đai Thanh Chương)
-            { name: "1.011441.000.00.00.H41-Đăng ký biện pháp bảo đảm bằng quyền sử dụng đất, tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 3 },
-            { name: "1.011443.000.00.00.H41-Xóa đăng ký biện pháp bảo đảm bằng quyền sử dụng đất, tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 1 },
-            { name: "1.012783.000.00.00.H41-Cấp đổi Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 7 },
-            { name: "1.012784.000.00.00.H41-Tách thửa hoặc hợp thửa đất.", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
-            { name: "1.012785.000.00.00.H41-Đăng ký, cấp GCN đối với trường hợp đã chuyển quyền sử dụng đất trước ngày 01/08/2024...", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
-            { name: "1.012786.000.00.00.H41-Cấp lại Giấy chứng nhận do bị mất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 10 },
+            // VĂN PHÒNG ĐẤT ĐAI THANH CHƯƠNG (Cấp phôi, biến động, thế chấp...)
+            { name: "1.011441.000.00.00.H41-Đăng ký biện pháp bảo đảm bằng quyền sử dụng đất, tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 3,
+              workflow: [
+                  { step: 1, name: "Một cửa nhận hồ sơ thế chấp", duration: 0.5, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Văn phòng Đăng ký đất đai kiểm tra sổ bộ", duration: 2, role: "VP ĐKĐĐ Thanh Chương" },
+                  { step: 3, name: "Ký thế chấp và trả kết quả", duration: 0.5, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "1.011443.000.00.00.H41-Xóa đăng ký biện pháp bảo đảm bằng quyền sử dụng đất, tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 3 },
+            { name: "1.012783.000.00.00.H41-Cấp đổi Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 7,
+              workflow: [
+                  { step: 1, name: "Một cửa tiếp nhận phôi cũ", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Công chức Địa chính rà soát hiện trạng", duration: 2, role: "Công chức Địa chính" },
+                  { step: 3, name: "Văn phòng Đăng ký Đất đai in phôi mới", duration: 3, role: "VP ĐKĐĐ Thanh Chương" },
+                  { step: 4, name: "Bàn giao trả GCN cho công dân", duration: 1, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "1.012784.000.00.00.H41-Tách thửa hoặc hợp thửa đất.", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15,
+              workflow: [
+                  { step: 1, name: "Tiếp nhận đo vẽ, tách thửa", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Đo vẽ sơ đồ thực tế", duration: 5, role: "Công chức Địa chính" },
+                  { step: 3, name: "VP Đăng ký Đất đai duyệt kỹ thuật thửa mới", duration: 7, role: "VP ĐKĐĐ Thanh Chương" },
+                  { step: 4, name: "Ký GCN mới và bàn giao", duration: 2, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "1.012785.000.00.00.H41-Đăng ký, cấp Giấy chứng nhận đối với trường hợp đã chuyển quyền sử dụng đất trước ngày 01 tháng 8 năm 2024 mà bên chuyển quyền đã được cấp Giấy chứng nhận nhưng chưa thực hiện thủ tục chuyển quyền theo quy định", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
+            { name: "1.012786.000.00.00.H41-Cấp lại Giấy chứng nhận do bị mất", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
             { name: "1.012790.000.00.00.H41-Đính chính Giấy chứng nhận đã cấp", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 10 },
-            { name: "1.013831.H41-Đăng ký biến động quyền sử dụng đất nông nghiệp; chuyển nhượng, thừa kế, tặng cho, góp vốn...", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
+            { name: "1.013831.H41-Đăng ký biến động quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất...", field: "Đất Đai", dept: "Văn phòng Đất đai Thanh Chương", duration: 15 },
 
-            // HỘ TỊCH (Văn phòng HĐND - UBND)
-            { name: "1.005461.000.00.00.H41- Đăng ký lại khai tử", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "1.004746.000.00.00.H41- Thủ tục đăng ký lại kết hôn", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "1.004884.000.00.00.H41- Thủ tục đăng ký lại khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "2.000806.000.00.00.H41- Thủ tục đăng ký kết hôn có yếu tố nước ngoài", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 15 },
-            { name: "1.000894.000.00.00.H41- Thủ tục đăng ký kết hôn", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
-            { name: "1.000656.000.00.00.H41- Thủ tục đăng ký khai tử", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
-            { name: "1.004772.000.00.00.H41- Thủ tục đăng ký khai sinh cho người đã có hồ sơ, giấy tờ cá nhân", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "1.001193.000.00.00.H41- Thủ tục đăng ký khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
-            { name: "1.004859.000.00.00.H41- Thủ tục thay đổi, cải chính, bổ sung thông tin hộ tịch, xác định lại dân tộc", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "1.004873.000.00.00.H41- Thủ tục cấp Giấy xác nhận tình trạng hôn nhân", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
-            { name: "2.000635.000.00.00.H41 - Cấp bản sao Trích lục hộ tịch, bản sao Giấy khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
-
-            // CHỨNG THỰC (Văn phòng HĐND - UBND)
-            { name: "2.001406.000.00.00.H41- Thủ tục chứng thực văn bản thỏa thuận phân chia di sản là QSDĐ, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "2.001009.000.00.00.H41- Thủ tục chứng thực văn bản khai nhận di sản là QSDĐ, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 5 },
-            { name: "2.001035.000.00.00.H41- Thủ tục chứng thực hợp đồng, giao dịch liên quan đến QSDĐ, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 3 },
-            { name: "2.000884.000.00.00.H41- Thủ tục chứng thực chữ ký trong các giấy tờ, văn bản...", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 1 },
-            { name: "2.000913.000.00.00.H41- Chứng thực việc sửa đổi, bổ sung, hủy bỏ hợp đồng, giao dịch", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 2 },
-            { name: "2.000815.000.00.00.H41- Chứng thực bản sao từ bản chính giấy tờ, văn bản...", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 1 },
-
-            // BẢO TRỢ XÃ HỘI (Phòng Văn hóa - Xã hội)
+            // PHÒNG VĂN HÓA - XÃ HỘI (Bảo trợ, Người có công, Giáo dục...)
+            { name: "2.002481.000.00.00.H41- Chuyển trường đối với học sinh trung học cơ sở.", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 3 },
+            { name: "1.013734.H41- Đăng ký hợp đồng lao động trực tiếp giao kết.", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
             { name: "1.001699.000.00.00.H41 - Xác định, xác định lại mức độ khuyết tật và cấp Giấy xác nhận khuyết tật", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 10 },
-            { name: "1.001776.000.00.00.H41- Thực hiện, thôi hưởng trợ cấp xã hội hàng tháng, kinh phí chăm sóc...", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 7 },
+            { name: "1.001776.000.00.00.H41- Thực hiện, điều chỉnh, thôi hưởng trợ cấp xã hội hàng tháng, hỗ trợ kinh phí chăm sóc, nuôi dưỡng hàng tháng", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 7,
+              workflow: [
+                  { step: 1, name: "Một cửa nhận hồ sơ trợ cấp", duration: 1, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Kiểm tra thực địa địa bàn đối tượng", duration: 2, role: "Công chức Văn hóa - Xã hội" },
+                  { step: 3, name: "Phòng Văn hóa - Xã hội Huyện xét duyệt", duration: 3, role: "Phòng VH-XH Huyện" },
+                  { step: 4, name: "Trả kết quả phê duyệt hưởng trợ cấp", duration: 1, role: "Bộ phận Một cửa" }
+              ]
+            },
             { name: "1.014027.H41- Thực hiện, điều chỉnh, thôi hưởng trợ cấp hưu trí xã hội", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 7 },
             { name: "1.014028.H41- Hỗ trợ chi phí mai táng đối với đối tượng hưởng trợ cấp hưu trí xã hội", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
             { name: "1.001731.000.00.00.H41- Hỗ trợ chi phí mai táng cho đối tượng bảo trợ xã hội", field: "Bảo trợ xã hội", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
-
-            // NGƯỜI CÓ CÔNG (Phòng Văn hóa - Xã hội)
             { name: "1.013750.H41- Thăm viếng mộ liệt sĩ.", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
-            { name: "1.010824.000.00.00.H41 - Hưởng trợ cấp khi người có công đang hưởng trợ cấp ưu đãi từ trần", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 10 },
-            { name: "1.010803.000.00.00.H41 - Giải quyết chế độ trợ cấp thờ cúng liệt sĩ.", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 15 },
+            { name: "1.010824.000.00.00.H41 - Hưởng trợ cấp khi người có công đang hưởng trợ cấp ưu đãi từ trần", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 7 },
+            { name: "1.010803.000.00.00.H41 - Giải quyết chế độ trợ cấp thờ cúng liệt sĩ.", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 7 },
             { name: "2.002308.000.00.00.H41- Giải quyết chế độ mai táng phí đối với thanh niên xung phong thời kỳ chống Pháp", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 10 },
             { name: "2.002307.000.00.00.H41- Giải quyết chế độ mai táng phí đối với cựu chiến binh", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 10 },
             { name: "1.010833.000.00.00.H41 - Cấp giấy xác nhận thân nhân của người có công", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
-            { name: "1.010816.000.00.00.H41 - Công nhận và giải quyết chế độ trợ cấp người bị nhiễm chất độc hóa học", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 15 },
+            { name: "1.010816.000.00.00.H41 - Công nhận và giải quyết chế độ ưu đãi người hoạt động kháng chiến bị nhiễm chất độc hóa học", field: "Người có công", dept: "Phòng Văn hóa - Xã hội", duration: 15 },
+            { name: "1.013855.H41- Cấp giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm đối với cơ sở kinh doanh dịch vụ ăn uống, cơ sở sản xuất thực phẩm thuộc phạm vi quản lý của Bộ Y tế (Cấp xã)", field: "Khác", dept: "Phòng Văn hóa - Xã hội", duration: 15 },
 
-            // CÁC THỦ TỤC KHÁC THEO BIỂU MẪU ĐÍNH KÈM
-            { name: "2.002481.000.00.00.H41- Chuyển trường đối với học sinh trung học cơ sở.", field: "Khác", dept: "Phòng Văn hóa - Xã hội", duration: 3 },
-            { name: "1.013734.H41- Đăng ký hợp đồng lao động trực tiếp giao kết.", field: "Khác", dept: "Phòng Văn hóa - Xã hội", duration: 5 },
-            { name: "1.013855.H41- Cấp Giấy chứng nhận cơ sở đủ điều kiện ATTP đối với cơ sở kinh doanh dịch vụ ăn uống, sản xuất (Bộ Y tế cấp xã)", field: "Khác", dept: "Phòng Văn hóa - Xã hội", duration: 15 },
-            { name: "1.002759.000.00.00.H41 - Cấp lại, đổi, điều chỉnh thông tin trên sổ BHXH, thẻ BHYT", field: "Khác", dept: "Phòng Kinh tế", duration: 5 },
-            { name: "2.001283.000.00.00.H41- Cấp Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai", field: "Khác", dept: "Phòng Kinh tế", duration: 7 },
-            { name: "1.001612.000.00.00.H41- Đăng ký thành lập hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "2.000720.000.00.00.H41- Đăng ký thay đổi nội dung đăng ký hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "1.001570.000.00.00.H41- Tạm ngừng kinh doanh, tiếp tục kinh doanh trước thời hạn...", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "2.000575.000.00.00.H41- Cấp lại Giấy chứng nhận đăng ký hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "1.001266.000.00.00.H41- Chấm dứt hoạt động hộ kinh doanh", field: "Khác", dept: "Phòng Kinh tế", duration: 3 },
-            { name: "2.001827.000.00.00.H41- Cấp Giấy chứng nhận cơ sở đủ điều kiện ATTP nông, lâm, thủy sản", field: "Khác", dept: "Phòng Kinh tế", duration: 15 },
-            { name: "1.013997.H41- Hỗ trợ cơ sở sản xuất bị thiệt hại do dịch bệnh động vật", field: "Khác", dept: "Phòng Kinh tế", duration: 20 },
+            // VĂN PHÒNG HĐND - UBND (Hộ tịch, Chứng thực)
+            { name: "2.001406.000.00.00.H41- Thủ tục chứng thực văn bản thỏa thuận phân chia di sản mà di sản là động sản, quyền sử dụng đất, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.001009.000.00.00.H41- Thủ tục chứng thực văn bản khai nhận di sản mà di sản là động sản, quyền sửa dụng đất, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.001035.000.00.00.H41 - Thủ tục chứng thực hợp đồng, giao dịch liên quan đến tài sản là động sản, quyền sử dụng đất, nhà ở", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.000884.000.00.00.H41- Thủ tục chứng thực chữ ký trong các giấy tờ, văn bản (áp dụng cho cả trường hợp chứng thực điểm chỉ và trường hợp người yêu cầu chứng thực không thể ký, không thể điểm chỉ được)", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 1,
+              workflow: [
+                  { step: 1, name: "Kiểm tra danh tính, chữ ký", duration: 0.3, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Thực hiện chứng thực, ký số sổ bộ", duration: 0.5, role: "Công chức Tư pháp - Hộ tịch" },
+                  { step: 3, name: "Đóng dấu lưu trữ, trả kết quả", duration: 0.2, role: "Bộ phận Một cửa" }
+              ]
+            },
+            { name: "2.000913.000.00.00.H41 - Chứng thực việc sửa đổi, bổ sung, hủy bỏ hợp đồng, giao dịch", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.000815.000.00.00.H41- Chứng thực bản sao từ bản chính giấy tờ, văn bản do cơ quan, tổ chức có thẩm quyền của Việt Nam; cơ quan, tổ chức có thẩm quyền của nước ngoài...", field: "Chứng thực", dept: "Văn phòng HĐND - UBND", duration: 1 },
+            { name: "1.005461.000.00.00.H41- Đăng ký lại khai tử", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "1.004746.000.00.00.H41- Thủ tục đăng ký lại kết hôn", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "1.004884.000.00.00.H41- Thủ tục đăng ký lại khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.000806.000.00.00.H41- Thủ tục đăng ký kết hôn có yếu tố nước ngoài", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 15 },
+            { name: "1.000894.000.00.00.H41- Thủ tục đăng ký kết hôn", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
+            { name: "1.000656.000.00.00.H41 - Thủ tục đăng ký khai tử", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
+            { name: "1.004772.000.00.00.H41 - Thủ tục đăng ký khai sinh cho người đã có hồ sơ, giấy tờ cá nhân", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "1.001193.000.00.00.H41 - Thủ tục đăng ký khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1,
+              workflow: [
+                  { step: 1, name: "Tiếp nhận giấy chứng sinh & tờ khai", duration: 0.2, role: "Bộ phận Một cửa" },
+                  { step: 2, name: "Nhập sổ hộ tịch điện tử", duration: 0.6, role: "Công chức Tư pháp - Hộ tịch" },
+                  { step: 3, name: "Duyệt ký số & Trả kết quả", duration: 0.2, role: "Lãnh đạo UBND xã" }
+              ]
+            },
+            { name: "1.004859.000.00.00.H41- Thủ tục thay đổi, cải chính, bổ sung thông tin hộ tịch, xác định lại dân tộc", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "1.004873.000.00.00.H41 - Thủ tục cấp Giấy xác nhận tình trạng hôn nhân", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 3 },
+            { name: "2.000635.000.00.00.H41 - Cấp bản sao Trích lục hộ tịch, bản sao Giấy khai sinh", field: "Hộ tịch", dept: "Văn phòng HĐND - UBND", duration: 1 },
             { name: "1.002211.000.00.00.H41 - Thủ tục công nhận hòa giải viên (cấp xã)", field: "Khác", dept: "Văn phòng HĐND - UBND", duration: 5 }
         ];
 
         let database = [];
         let currentlySelectedId = null;
         let confirmCallback = null;
-        let tempExcelImportData = []; // Temporal storage for parsed Excel data
+        let tempExcelImportData = [];
 
-        // Custom Confirm Dialogue Box instead of native confirm()
         function showCustomConfirm(msg, callback) {
             document.getElementById("confirmMessage").innerText = msg;
             confirmCallback = callback;
@@ -657,7 +720,6 @@
             }, 300);
         }
 
-        // Updated mock datasets referencing split departments
         const mockRecords = [
             {
                 id: "rec_1",
@@ -665,17 +727,18 @@
                 citizen: "Nguyễn Duy Hùng",
                 phone: "0987112233",
                 field: "Đất Đai",
-                tthcName: "1.013978.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp GCN lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư...",
+                tthcName: "1.013978.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư, người gốc Việt Nam định cư ở nước ngoài",
                 dept: "Phòng Kinh tế",
-                dateRec: "2026-06-25", // Overdue
+                dateRec: "2026-06-25",
                 duration: 15,
                 deadline: "2026-07-10",
                 status: "Đang xử lý",
                 officer: "Nguyễn Văn Toàn - Công chức Địa chính - Nông nghiệp",
+                currentStep: 2,
                 notes: "Hồ sơ liên thông đã chuyển Phòng Kinh tế huyện thẩm định. Đang chờ ý kiến phản hồi hiện trạng đất thực tế.",
                 journal: [
                     { date: "2026-06-25 09:00", text: "Công chức Một cửa Nguyễn Văn Toàn tiếp nhận hồ sơ, kiểm tra thành phần pháp lý." },
-                    { date: "2026-06-26 14:30", text: "Đã chuyển tiếp liên thông trực tuyến lên Phòng Kinh tế Huyện Thanh Chương." }
+                    { date: "2026-06-26 14:30", text: "Chuyển tiếp hồ sơ sang Bước 2: Kiểm tra đo đạc thực địa." }
                 ]
             },
             {
@@ -684,54 +747,18 @@
                 citizen: "Phan Thị Lan",
                 phone: "0915223344",
                 field: "Đất Đai",
-                tthcName: "1.012790.000.00.00.H41-Đính chính Giấy chứng nhận đã cấp",
+                tthcName: "1.012783.000.00.00.H41-Cấp đổi Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất",
                 dept: "Văn phòng Đất đai Thanh Chương",
-                dateRec: "2026-07-08", // Sắp trễ hạn (Today is 2026-07-15)
-                duration: 10,
-                deadline: "2026-07-18",
+                dateRec: "2026-07-08",
+                duration: 7,
+                deadline: "2026-07-15",
                 status: "Đang xử lý",
-                officer: "Lê Văn Tuấn - Công chức Địa chính (Phụ trách VP ĐKĐĐ)",
+                officer: "Lê Văn Tuấn - Công chức Địa chính",
+                currentStep: 3,
                 notes: "Đang chuyển Chi nhánh Văn phòng Đăng ký Đất đai Thanh Chương thẩm duyệt sai sót phôi gốc.",
                 journal: [
-                    { date: "2026-07-08 10:15", text: "Một cửa tiếp nhận hồ sơ gốc và tờ khai đề nghị đính chính của bà Lan." },
-                    { date: "2026-07-10 15:00", text: "Chuyển phát bưu điện chuyển hồ sơ gốc lên Văn phòng Đăng ký Đất đai Huyện." }
-                ]
-            },
-            {
-                id: "rec_3",
-                code: "HS-HT-2026-092",
-                citizen: "Lê Văn Tùng",
-                phone: "0904334455",
-                field: "Hộ tịch",
-                tthcName: "1.001193.000.00.00.H41- Thủ tục đăng ký khai sinh",
-                dept: "Văn phòng HĐND - UBND",
-                dateRec: "2026-07-15",
-                duration: 1,
-                deadline: "2026-07-16",
-                status: "Đang xử lý",
-                officer: "Phan Hồng Sơn - Công chức Tư pháp - Hộ tịch",
-                notes: "Đang rà soát sổ bộ hộ tịch xã để làm thủ tục cấp giấy khai sinh gốc.",
-                journal: [
-                    { date: "2026-07-15 08:30", text: "Tiếp nhận trực tiếp của công dân tại Trung tâm Một cửa xã Cát Ngạn." }
-                ]
-            },
-            {
-                id: "rec_4",
-                code: "HS-BT-2026-041",
-                citizen: "Trần Văn Bình",
-                phone: "0345123456",
-                field: "Bảo trợ xã hội",
-                tthcName: "1.001776.000.00.00.H41- Thực hiện, thôi hưởng trợ cấp xã hội hàng tháng, kinh phí chăm sóc...",
-                dept: "Phòng Văn hóa - Xã hội",
-                dateRec: "2026-07-02",
-                duration: 7,
-                deadline: "2026-07-09",
-                status: "Đã hoàn thành",
-                officer: "Lê Thị Mai - Công chức Văn hóa - Xã hội",
-                notes: "Huyện đã ký phê duyệt đồng bộ về hệ thống Một cửa xã Cát Ngạn.",
-                journal: [
-                    { date: "2026-07-02 11:30", text: "Một cửa tiếp nhận đơn trợ cấp bảo trợ xã hội." },
-                    { date: "2026-07-08 16:00", text: "Phòng VH-XH huyện duyệt đồng ý và gửi trả kết quả số hóa về xã." }
+                    { date: "2026-07-08 10:15", text: "Một cửa tiếp nhận hồ sơ gốc và tờ khai đề nghị cấp đổi." },
+                    { date: "2026-07-10 15:00", text: "Chuyển bước quy trình: Văn phòng Đăng ký đất đai thẩm định in phôi." }
                 ]
             }
         ];
@@ -740,33 +767,77 @@
             initApp();
         };
 
-        function initApp() {
-            // Setup custom confirm buttons
+        async function initApp() {
             document.getElementById("confirmCancelBtn").onclick = closeConfirmModal;
             document.getElementById("confirmOkBtn").onclick = function() {
                 if (confirmCallback) confirmCallback();
                 closeConfirmModal();
             };
 
-            const savedData = localStorage.getItem("ubnd_tthc_db_v2");
-            if (savedData) {
-                try {
-                    database = JSON.parse(savedData);
-                } catch (e) {
-                    database = [...mockRecords];
-                    saveState();
-                }
-            } else {
-                database = [...mockRecords];
-                saveState();
-            }
+            await fetchRecords();
             applyFilters();
             buildStats();
         }
 
-        function saveState() {
-            localStorage.setItem("ubnd_tthc_db_v2", JSON.stringify(database));
+        async function fetchRecords() {
+            if (IS_SERVER_MODE) {
+                try {
+                    const res = await fetch('/api/records');
+                    const json = await res.json();
+                    if (json.success) {
+                        database = json.data;
+                        return;
+                    }
+                } catch (e) {
+                    console.warn("Backend API unreachable, falling back to LocalStorage", e);
+                }
+            }
+            const savedData = localStorage.getItem("ubnd_tthc_db_v3");
+            database = savedData ? JSON.parse(savedData) : [...mockRecords];
+        }
+
+        async function saveState(recordToUpdate = null, actionType = 'update', mode = 'append') {
+            if (IS_SERVER_MODE && recordToUpdate) {
+                try {
+                    let res;
+                    if (actionType === 'delete') {
+                        res = await fetch(`/api/records/${recordToUpdate.id}`, { method: 'DELETE' });
+                    } else if (actionType === 'create') {
+                        res = await fetch('/api/records', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(recordToUpdate)
+                        });
+                    } else if (actionType === 'bulk') {
+                        res = await fetch('/api/records/bulk', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ records: recordToUpdate, mode: mode })
+                        });
+                    } else {
+                        res = await fetch(`/api/records/${recordToUpdate.id}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(recordToUpdate)
+                        });
+                    }
+                    const json = await res.json();
+                    if (json.success) {
+                        await fetchRecords();
+                        buildStats();
+                        return true;
+                    } else {
+                        showToast(json.message || "Lỗi đồng bộ máy chủ!", "error");
+                        return false;
+                    }
+                } catch (e) {
+                    console.error("Lỗi kết nối máy chủ:", e);
+                    showToast("Lỗi máy chủ! Hệ thống đang chuyển sang lưu tạm trình duyệt.", "error");
+                }
+            }
+            localStorage.setItem("ubnd_tthc_db_v3", JSON.stringify(database));
             buildStats();
+            return true;
         }
 
         function calculateDeadline() {
@@ -791,9 +862,7 @@
             const selectedField = document.getElementById("formField").value;
             const tthcSelect = document.getElementById("formTthc");
             
-            // Filter templates based on domain
             const filtered = TTHC_TEMPLATES.filter(item => item.field === selectedField);
-            
             tthcSelect.innerHTML = '<option value="">-- Chọn một thủ tục cụ thể --</option>';
             
             if (filtered.length > 0) {
@@ -801,22 +870,18 @@
                     tthcSelect.innerHTML += `<option value="${item.name}">${item.name}</option>`;
                 });
             } else {
-                tthcSelect.innerHTML = '<option value="">-- Vui lòng chọn lĩnh vực khác để xem TTHC tương ứng --</option>';
+                tthcSelect.innerHTML = '<option value="">-- Vui lòng chọn lĩnh vực khác --</option>';
             }
 
-            // Automatically resolve default placeholder office department & default officer role
-            let targetDept = "Vần phòng HĐND - UBND"; 
+            let targetDept = "Văn phòng HĐND - UBND"; 
             let defaultOfficer = "Công chức Một cửa"; 
 
             if (selectedField === "Đất Đai") {
                 targetDept = "Văn phòng Đất đai Thanh Chương";
-                defaultOfficer = "Công chức Địa chính (Phụ trách VP ĐKĐĐ)";
+                defaultOfficer = "Công chức Địa chính - Xây dựng";
             } else if (selectedField === "Bảo trợ xã hội" || selectedField === "Người có công") {
                 targetDept = "Phòng Văn hóa - Xã hội";
                 defaultOfficer = "Công chức Văn hóa - Xã hội";
-            } else if (selectedField === "Khác") {
-                targetDept = "Phòng Kinh tế";
-                defaultOfficer = "Công chức Địa chính - Nông nghiệp";
             } else if (selectedField === "Hộ tịch" || selectedField === "Chứng thực") {
                 targetDept = "Văn phòng HĐND - UBND";
                 defaultOfficer = "Công chức Tư pháp - Hộ tịch";
@@ -834,28 +899,12 @@
             if (match) {
                 document.getElementById("formDuration").value = match.duration;
                 document.getElementById("formDept").value = match.dept;
-                
-                // Adjust default officer role precisely based on matching target department
-                let officerInput = document.getElementById("formOfficer");
-                if (match.dept === "Văn phòng Đất đai Thanh Chương") {
-                    officerInput.value = "Công chức Địa chính (Phụ trách VP ĐKĐĐ)";
-                } else if (match.dept === "Phòng Kinh tế") {
-                    officerInput.value = "Công chức Địa chính - Nông nghiệp";
-                } else if (match.dept === "Phòng Văn hóa - Xã hội") {
-                    officerInput.value = "Công chức Văn hóa - Xã hội";
-                } else if (match.dept === "Văn phòng HĐND - UBND") {
-                    if (match.field === "Hộ tịch" || match.field === "Chứng thực") {
-                        officerInput.value = "Công chức Tư pháp - Hộ tịch";
-                    } else {
-                        officerInput.value = "Công chức Văn phòng - Thống kê";
-                    }
-                }
                 calculateDeadline();
             }
         }
 
         function buildStats() {
-            const today = new Date("2026-07-15");
+            const today = new Date("2026-07-16");
             
             let total = database.length;
             let processing = 0;
@@ -868,7 +917,6 @@
                     completed++;
                 } else {
                     processing++;
-                    
                     const dl = new Date(rec.deadline);
                     const diffTime = dl - today;
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -893,7 +941,7 @@
             const filterDept = document.getElementById("filterDept").value;
             const filterStatus = document.getElementById("filterStatus").value;
             const landPriorityOnly = document.getElementById("filterLandPriority").checked;
-            const today = new Date("2026-07-15");
+            const today = new Date("2026-07-16");
 
             let filteredList = database.filter(rec => {
                 const matchQuery = !query || 
@@ -903,8 +951,6 @@
                                    (rec.phone && rec.phone.includes(query));
                 
                 const matchDept = !filterDept || rec.dept === filterDept;
-
-                // Priority land status filters both "Phòng Kinh tế" (land items) and "Văn phòng Đất đai Thanh Chương"
                 const matchLand = !landPriorityOnly || rec.field === "Đất Đai";
 
                 let statusGroup = "processing";
@@ -922,7 +968,6 @@
                 return matchQuery && matchDept && matchLand && matchStatus;
             });
 
-            // Sorting engine: overdue entries rise to upper priority
             filteredList.sort((a, b) => {
                 if (a.status === "Đã hoàn thành" && b.status !== "Đã hoàn thành") return 1;
                 if (a.status !== "Đã hoàn thành" && b.status === "Đã hoàn thành") return -1;
@@ -942,11 +987,22 @@
             return dateStr;
         }
 
+        function getWorkflowForRecord(rec) {
+            const match = TTHC_TEMPLATES.find(t => t.name === rec.tthcName);
+            if (match && match.workflow) return match.workflow;
+            
+            return [
+                { step: 1, name: "Một cửa tiếp nhận", duration: 1, role: rec.officer || "Cán bộ nhận" },
+                { step: 2, name: "Thẩm định xử lý", duration: rec.duration > 2 ? rec.duration - 2 : 1, role: "Cán bộ chuyên môn" },
+                { step: 3, name: "Ký duyệt & Trả kết quả", duration: 1, role: "Lãnh đạo cơ quan" }
+            ];
+        }
+
         function renderTable(list) {
             const tbody = document.getElementById("recordTableBody");
             const emptyState = document.getElementById("emptyState");
             tbody.innerHTML = "";
-            const today = new Date("2026-07-15");
+            const today = new Date("2026-07-16");
 
             if (list.length === 0) {
                 emptyState.classList.remove("hidden");
@@ -965,40 +1021,45 @@
 
                 if (rec.status === "Đã hoàn thành") {
                     rowBgClass = "bg-emerald-50 bg-opacity-40 hover:bg-emerald-50";
-                    badgeHTML = `<span class="bg-emerald-100 text-emerald-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-check"></i> Đã có kết quả</span>`;
-                    deadlineTextHTML = `<span class="text-emerald-700 font-semibold text-xs"><i class="fa-solid fa-circle-check"></i> Xong</span>`;
+                    badgeHTML = `<span class="bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-check"></i> Hoàn thành</span>`;
+                    deadlineTextHTML = `<span class="text-emerald-700 font-semibold text-xs">Xong đúng hạn</span>`;
                 } else if (rec.status === "Chờ bổ sung") {
                     rowBgClass = "bg-purple-50 bg-opacity-40 hover:bg-purple-100";
-                    badgeHTML = `<span class="bg-purple-100 text-purple-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-triangle-exclamation"></i> Chờ bổ sung</span>`;
+                    badgeHTML = `<span class="bg-purple-100 text-purple-800 text-[11px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-triangle-exclamation"></i> Chờ bổ sung</span>`;
                     deadlineTextHTML = `<span class="text-purple-600 font-semibold text-xs">Tạm dừng hạn</span>`;
                 } else {
                     if (diffDays < 0) {
                         rowBgClass = "bg-red-50 bg-opacity-70 hover:bg-red-100 border-l-4 border-red-500";
-                        badgeHTML = `<span class="bg-red-600 text-white text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-circle-exclamation"></i> TRỄ HẠN ${Math.abs(diffDays)} ngày!</span>`;
-                        deadlineTextHTML = `<span class="text-red-700 font-bold text-xs"><i class="fa-solid fa-triangle-exclamation"></i> Trễ ${Math.abs(diffDays)} ngày</span>`;
+                        badgeHTML = `<span class="bg-red-600 text-white text-[11px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-max animate-pulse">TRỄ ${Math.abs(diffDays)} NGÀY</span>`;
+                        deadlineTextHTML = `<span class="text-red-700 font-bold text-xs">Trễ ${Math.abs(diffDays)} ngày</span>`;
                     } else if (diffDays <= 2) {
                         rowBgClass = "bg-amber-50 hover:bg-amber-100 border-l-4 border-amber-400";
-                        badgeHTML = `<span class="bg-amber-100 text-amber-800 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 w-max"><i class="fa-solid fa-clock"></i> Khẩn (Còn ${diffDays} ngày)</span>`;
+                        badgeHTML = `<span class="bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 w-max">Khẩn (Còn ${diffDays}n)</span>`;
                         deadlineTextHTML = `<span class="text-amber-700 font-semibold text-xs">Còn ${diffDays} ngày</span>`;
                     } else {
                         rowBgClass = "hover:bg-slate-50";
-                        badgeHTML = `<span class="bg-blue-100 text-blue-800 text-[11px] px-2.5 py-1 rounded-full font-semibold flex items-center gap-1 w-max"><i class="fa-solid fa-circle-notch animate-spin"></i> Đang giải quyết</span>`;
+                        badgeHTML = `<span class="bg-blue-100 text-blue-800 text-[11px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 w-max">Đang xử lý</span>`;
                         deadlineTextHTML = `<span class="text-slate-600 font-medium text-xs">Còn ${diffDays} ngày</span>`;
                     }
                 }
 
                 const isLandPriority = rec.field === "Đất Đai";
                 const priorityIndicator = isLandPriority 
-                    ? `<span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase inline-flex items-center gap-0.5"><i class="fa-solid fa-star"></i> ĐẤT ĐAI</span>` 
+                    ? `<span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase inline-flex items-center gap-0.5"><i class="fa-solid fa-star"></i> Đất Đai</span>` 
                     : "";
 
-                // Color-coding departments differently
                 let deptBadgeClass = "bg-slate-100 text-slate-700";
                 if (rec.dept === "Văn phòng Đất đai Thanh Chương") {
                     deptBadgeClass = "bg-blue-100 text-blue-800 font-semibold";
                 } else if (rec.dept === "Phòng Kinh tế") {
                     deptBadgeClass = "bg-emerald-100 text-emerald-800 font-semibold";
                 }
+
+                // Workflow steps status
+                const workflow = getWorkflowForRecord(rec);
+                const currentStepIdx = (rec.currentStep || 1) - 1;
+                const currentStepName = workflow[currentStepIdx] ? workflow[currentStepIdx].name : "N/A";
+                const stepsCompletedText = rec.status === "Đã hoàn thành" ? "Hoàn thành toàn bộ" : `Bước ${rec.currentStep || 1}/${workflow.length}: ${currentStepName}`;
 
                 const row = document.createElement("tr");
                 row.className = `${rowBgClass} transition-colors cursor-pointer`;
@@ -1018,10 +1079,10 @@
                     </td>
                     <td class="py-4 px-4">
                         <div class="font-bold text-slate-700 text-xs">${rec.citizen}</div>
-                        <div class="text-[11px] text-slate-500 font-mono">${rec.phone || "Không để lại SĐT"}</div>
-                        <div class="text-[10px] text-emerald-800 font-bold mt-1.5 flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded w-max border border-emerald-100/60" title="Công chức PVHCC Một Cửa">
-                            <i class="fa-solid fa-user-tie text-[9px]"></i>
-                            <span class="truncate max-w-[170px]">${rec.officer || "Công chức Tiếp nhận"}</span>
+                        <div class="text-[11px] text-slate-500 font-mono">${rec.phone || "Không có SĐT"}</div>
+                        <div class="text-[10px] text-emerald-800 font-bold mt-1 flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded w-max" title="Công chức PVHCC">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>${rec.officer || "Chưa gán"}</span>
                         </div>
                     </td>
                     <td class="py-4 px-4 text-slate-600 font-semibold text-xs">${formatDate(rec.dateRec)}</td>
@@ -1030,13 +1091,16 @@
                         <div class="text-[10px] mt-0.5">${deadlineTextHTML}</div>
                     </td>
                     <td class="py-4 px-4">
-                        <span class="text-[11px] px-2 py-0.5 rounded-full ${deptBadgeClass} block w-max max-w-[210px] truncate" title="${rec.dept}">${rec.dept}</span>
-                        <div class="mt-1.5">${badgeHTML}</div>
+                        <div class="text-xs font-semibold text-slate-700 truncate max-w-[200px]" title="${stepsCompletedText}">${stepsCompletedText}</div>
+                        <div class="mt-1 flex items-center gap-2">
+                            <span class="text-[11px] px-2 py-0.5 rounded-full ${deptBadgeClass} block w-max max-w-[150px] truncate" title="${rec.dept}">${rec.dept}</span>
+                            ${badgeHTML}
+                        </div>
                     </td>
                     <td class="py-4 px-4 text-center">
                         <div class="flex items-center justify-center gap-1">
-                            <button onclick="openDetailModal('${rec.id}')" class="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-md transition-colors" title="Xem nhật ký & tiến độ">
-                                <i class="fa-solid fa-eye text-xs"></i>
+                            <button onclick="openDetailModal('${rec.id}')" class="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-md transition-colors" title="Xem chi tiết & Chuyển bước">
+                                <i class="fa-solid fa-route text-xs text-emerald-800"></i>
                             </button>
                             <button onclick="editRecordDirectly('${rec.id}')" class="p-1.5 bg-slate-100 hover:bg-emerald-100 text-slate-600 hover:text-emerald-700 rounded-md transition-colors" title="Chỉnh sửa">
                                 <i class="fa-solid fa-pen text-xs"></i>
@@ -1056,13 +1120,13 @@
             const container = document.getElementById("formModalContainer");
             
             if (!isEdit) {
-                document.getElementById("formModalTitle").innerHTML = '<i class="fa-solid fa-file-circle-plus"></i> Tiếp Nhận Hồ Sơ Mới (Trung tâm PVHCC)';
+                document.getElementById("formModalTitle").innerHTML = '<i class="fa-solid fa-file-circle-plus"></i> Tiếp Nhận Hồ Sơ Mới (Trung tâm Một cửa)';
                 document.getElementById("recordForm").reset();
                 document.getElementById("editRecordId").value = "";
                 
                 const nextNum = database.length + 1;
                 document.getElementById("formCode").value = `HS-DT-2026-${nextNum.toString().padStart(3, '0')}`;
-                document.getElementById("formDateRec").value = "2026-07-15";
+                document.getElementById("formDateRec").value = "2026-07-16";
                 
                 onFieldChange();
             } else {
@@ -1086,7 +1150,7 @@
             }, 300);
         }
 
-        function saveRecord(e) {
+        async function saveRecord(e) {
             e.preventDefault();
             
             const editId = document.getElementById("editRecordId").value;
@@ -1108,32 +1172,38 @@
                 return;
             }
 
+            let success = false;
             if (editId) {
                 const recIndex = database.findIndex(r => r.id === editId);
                 if (recIndex !== -1) {
-                    database[recIndex] = {
+                    const updated = {
                         ...database[recIndex],
                         code, citizen, field, tthcName, dept, dateRec, duration, deadline, phone, status, officer,
                         notes: initialNotes || database[recIndex].notes
                     };
-                    showToast("Đã cập nhật thông tin hồ sơ thành công!", "success");
+                    database[recIndex] = updated;
+                    success = await saveState(updated, 'update');
+                    if (success) showToast("Đã cập nhật thông tin thành công!", "success");
                 }
             } else {
                 const newRecord = {
                     id: "rec_" + Date.now(),
                     code, citizen, phone, field, tthcName, dept, dateRec, duration, deadline, status, officer,
-                    notes: initialNotes || "Đã tiếp nhận hồ sơ mới thành công tại Trung tâm PVHCC xã.",
+                    currentStep: 1,
+                    notes: initialNotes || "Đã tiếp nhận thành công.",
                     journal: [
-                        { date: "2026-07-15 16:00", text: initialNotes || `Công chức Một cửa [${officer}] đã tiếp nhận hồ sơ gốc và cập nhật tiến độ lên bảng giám sát.` }
+                        { date: "2026-07-16 08:00", text: initialNotes || `Công chức Một cửa [${officer}] tiếp nhận hồ sơ gốc và cập nhật lên hệ thống.` }
                     ]
                 };
                 database.push(newRecord);
-                showToast("Đã tiếp nhận thành công hồ sơ hành chính mới!", "success");
+                success = await saveState(newRecord, 'create');
+                if (success) showToast("Đã tiếp nhận hồ sơ thành công!", "success");
             }
 
-            saveState();
-            applyFilters();
-            closeFormModal();
+            if (success) {
+                applyFilters();
+                closeFormModal();
+            }
         }
 
         function editRecordDirectly(id) {
@@ -1164,11 +1234,13 @@
             const rec = database.find(r => r.id === id);
             if (!rec) return;
 
-            showCustomConfirm(`Đồng chí có chắc chắn muốn XÓA hồ sơ ${rec.code} của công dân ${rec.citizen} ra khỏi hệ thống giám sát không?`, () => {
+            showCustomConfirm(`Đồng chí có chắc chắn muốn XÓA hồ sơ ${rec.code} của ${rec.citizen}?`, async () => {
                 database = database.filter(r => r.id !== id);
-                saveState();
-                applyFilters();
-                showToast("Đã xóa hồ sơ khỏi bảng giám sát!", "success");
+                const success = await saveState(rec, 'delete');
+                if (success) {
+                    applyFilters();
+                    showToast("Đã xóa hồ sơ thành công!", "success");
+                }
             });
         }
 
@@ -1177,7 +1249,7 @@
             if (!rec) return;
 
             currentlySelectedId = id;
-            const today = new Date("2026-07-15");
+            const today = new Date("2026-07-16");
 
             document.getElementById("detailTthc").innerText = rec.tthcName;
             document.getElementById("detailField").innerText = rec.field;
@@ -1205,7 +1277,7 @@
 
             if (rec.status === "Đã hoàn thành") {
                 statusBadgeEl.className = "bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-bold inline-flex items-center gap-1";
-                statusBadgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã hoàn thành (Có kết quả)';
+                statusBadgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã hoàn thành';
                 daysLeftEl.className = "text-sm font-bold text-emerald-600 mt-1";
                 daysLeftEl.innerText = "Đúng hạn!";
             } else if (rec.status === "Chờ bổ sung") {
@@ -1232,6 +1304,7 @@
                 }
             }
 
+            renderWorkflowUI(rec);
             renderJournalLogs(rec);
 
             const modal = document.getElementById("detailModal");
@@ -1241,6 +1314,100 @@
                 modal.classList.remove("opacity-0");
                 container.classList.remove("scale-95");
             }, 10);
+        }
+
+        function renderWorkflowUI(rec) {
+            const workflow = getWorkflowForRecord(rec);
+            const currentStep = rec.currentStep || 1;
+            
+            document.getElementById("workflowSummary").innerText = `Bước ${currentStep}/${workflow.length}`;
+            
+            const stepperContainer = document.getElementById("workflowStepperUI");
+            stepperContainer.innerHTML = "";
+
+            workflow.forEach((step, idx) => {
+                const stepNum = idx + 1;
+                let stepStatusClass = "";
+                let stepBadgeClass = "";
+                
+                if (rec.status === "Đã hoàn thành") {
+                    stepStatusClass = "border-emerald-500 bg-emerald-50 text-emerald-800";
+                    stepBadgeClass = "bg-emerald-600 text-white";
+                } else if (stepNum < currentStep) {
+                    stepStatusClass = "border-emerald-500 bg-emerald-50 text-emerald-800";
+                    stepBadgeClass = "bg-emerald-600 text-white";
+                } else if (stepNum === currentStep) {
+                    stepStatusClass = "border-blue-500 bg-blue-50 text-blue-800 ring-2 ring-blue-200";
+                    stepBadgeClass = "bg-blue-600 text-white animate-pulse";
+                } else {
+                    stepStatusClass = "border-slate-200 bg-white text-slate-400";
+                    stepBadgeClass = "bg-slate-300 text-slate-600";
+                }
+
+                const stepEl = document.createElement("div");
+                stepEl.className = `flex-1 flex flex-row md:flex-col items-center gap-3 p-3 rounded-lg border ${stepStatusClass} min-w-[150px]`;
+                stepEl.innerHTML = `
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${stepBadgeClass}">${stepNum}</span>
+                    <div class="md:text-center">
+                        <p class="text-xs font-bold truncate max-w-[160px]" title="${step.name}">${step.name}</p>
+                        <p class="text-[10px] text-slate-400 font-medium">Vai: ${step.role}</p>
+                        <p class="text-[10px] text-slate-500">Định mức: ${step.duration} ngày</p>
+                    </div>
+                `;
+                stepperContainer.appendChild(stepEl);
+            });
+
+            const nextStepNameEl = document.getElementById("nextStepName");
+            const btnAdvance = document.getElementById("btnAdvanceStep");
+
+            if (rec.status === "Đã hoàn thành" || currentStep > workflow.length) {
+                nextStepNameEl.innerText = "Hoàn thành quy trình giải quyết!";
+                btnAdvance.disabled = true;
+                btnAdvance.className = "bg-slate-300 text-slate-500 text-xs font-bold px-4 py-2 rounded-lg cursor-not-allowed";
+            } else {
+                const nextStepObj = workflow[currentStep];
+                if (nextStepObj) {
+                    nextStepNameEl.innerText = `${nextStepObj.name} (${nextStepObj.role})`;
+                    btnAdvance.disabled = false;
+                    btnAdvance.className = "bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-all";
+                } else {
+                    nextStepNameEl.innerText = "Hoàn thành & ký duyệt kết quả";
+                    btnAdvance.disabled = false;
+                    btnAdvance.className = "bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition-all";
+                }
+            }
+        }
+
+        async function advanceWorkflowStep() {
+            const recIndex = database.findIndex(r => r.id === currentlySelectedId);
+            if (recIndex === -1) return;
+
+            const rec = database[recIndex];
+            const workflow = getWorkflowForRecord(rec);
+            const currentStep = rec.currentStep || 1;
+            
+            if (currentStep >= workflow.length) {
+                rec.status = "Đã hoàn thành";
+                rec.journal.push({
+                    date: "2026-07-16 11:30",
+                    text: "Hoàn thành toàn bộ quy trình nội bộ, có kết quả trả công dân."
+                });
+                showToast("Quy trình nội bộ hoàn thành đúng hạn!", "success");
+            } else {
+                const finishedStepName = workflow[currentStep - 1].name;
+                const nextStepName = workflow[currentStep].name;
+                
+                rec.currentStep = currentStep + 1;
+                rec.journal.push({
+                    date: "2026-07-16 11:30",
+                    text: `Chuyển tiếp thành công: Từ [Bước ${currentStep}: ${finishedStepName}] sang [Bước ${currentStep + 1}: ${nextStepName}].`
+                });
+                showToast(`Đã chuyển sang: ${nextStepName}`, "success");
+            }
+
+            await saveState(rec, 'update');
+            applyFilters();
+            openDetailModal(currentlySelectedId);
         }
 
         function closeDetailModal() {
@@ -1284,7 +1451,7 @@
             });
         }
 
-        function addJournalLog() {
+        async function addJournalLog() {
             const input = document.getElementById("logInput");
             const val = input.value.trim();
             if (!val) return;
@@ -1292,18 +1459,7 @@
             const recIndex = database.findIndex(r => r.id === currentlySelectedId);
             if (recIndex === -1) return;
 
-            const now = new Date();
-            const yyyy = now.getFullYear();
-            let mm = now.getMonth() + 1;
-            let dd = now.getDate();
-            let hh = now.getHours();
-            let min = now.getMinutes();
-            if (mm < 10) mm = '0' + mm;
-            if (dd < 10) dd = '0' + dd;
-            if (hh < 10) hh = '0' + hh;
-            if (min < 10) min = '0' + min;
-
-            const timeStr = `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+            const timeStr = "2026-07-16 11:30";
 
             if (!database[recIndex].journal) {
                 database[recIndex].journal = [];
@@ -1314,14 +1470,14 @@
                 text: val
             });
 
-            saveState();
+            await saveState(database[recIndex], 'update');
             applyFilters();
             renderJournalLogs(database[recIndex]);
             input.value = "";
-            showToast("Đã ghi nhận tiến độ liên thông!", "success");
+            showToast("Đã thêm phản hồi tiến độ mới!", "success");
         }
 
-        function updateStatusFromDetail(newStatus) {
+        async function updateStatusFromDetail(newStatus) {
             const recIndex = database.findIndex(r => r.id === currentlySelectedId);
             if (recIndex === -1) return;
 
@@ -1333,31 +1489,35 @@
 
             database[recIndex].status = newStatus;
             
+            if (newStatus === "Đã hoàn thành") {
+                const workflow = getWorkflowForRecord(database[recIndex]);
+                database[recIndex].currentStep = workflow.length;
+            }
+
             if (!database[recIndex].journal) {
                 database[recIndex].journal = [];
             }
             database[recIndex].journal.push({
-                date: `2026-07-15 16:05`,
-                text: `Cập nhật trạng thái xử lý: từ [${oldStatus}] sang [${newStatus}].`
+                date: `2026-07-16 11:30`,
+                text: `Cập nhật trạng thái thủ công: từ [${oldStatus}] sang [${newStatus}].`
             });
 
-            saveState();
+            await saveState(database[recIndex], 'update');
             applyFilters();
             openDetailModal(currentlySelectedId);
-            showToast(`Cập nhật trạng thái thành: ${newStatus}`, "success");
+            showToast(`Đã chuyển trạng thái thành: ${newStatus}`, "success");
         }
 
         function openExcelModal() {
             const modal = document.getElementById("excelModal");
             const container = document.getElementById("excelModalContainer");
             
-            // Reset modal data
             document.getElementById("excelFileInput").value = "";
             document.getElementById("uploadedFileName").innerText = "Chưa có tệp nào được chọn";
             document.getElementById("parsedCount").innerText = "0";
             document.getElementById("excelPreviewTableBody").innerHTML = `
                 <tr>
-                    <td colspan="6" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
+                    <td colspan="5" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
                 </tr>
             `;
             document.getElementById("excelCommitBtn").disabled = true;
@@ -1381,50 +1541,46 @@
         }
 
         function downloadExcelTemplate() {
-            // Setup columns
             const headers = [
                 [
                     "Mã Hồ Sơ (*)", 
                     "Tên Thủ Tục (*)", 
-                    "Lĩnh Vực (Đất Đai / Hộ tịch / Chứng thực / Bảo trợ xã hội / Người có công / Khác) (*)", 
+                    "Lĩnh Vực (Đất Đai / Hộ tịch / Chứng thực / Bảo trợ xã hội / Người có công) (*)", 
                     "Họ Tên Công Dân (*)", 
                     "Số Điện Thoại", 
-                    "Ngày Tiếp Nhận (YYYY-MM-DD) (*)", 
-                    "Số Ngày Định Mức (*)", 
-                    "Hạn Trả Kết Quả (YYYY-MM-DD) (*)", 
-                    "Cơ Quan Chủ Trì (*)", 
-                    "Công Chức Tiếp Nhận (*)", 
-                    "Trạng Thái (Đang xử lý / Chờ bổ sung / Đã hoàn thành) (*)", 
-                    "Ghi Chú"
+                    "Ngày Tiếp Nhận (YYYY-MM-DD)", 
+                    "Số Ngày Định Mức", 
+                    "Hạn Trả (YYYY-MM-DD)", 
+                    "Cơ Quan Chủ Trì", 
+                    "Công Chức Tiếp Nhận", 
+                    "Trạng Thái"
                 ]
             ];
             
-            // Add illustrative row matching original specs
             const sampleRows = [
                 [
                     "HS-DT-2026-999", 
-                    "1.013978.H41- Đăng ký đất đai, tài sản gắn liền với đất, cấp GCN lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư...", 
+                    "1.012783.000.00.00.H41-Cấp đổi Giấy chứng nhận quyền sử dụng đất...", 
                     "Đất Đai", 
                     "Nguyễn Văn Mẫu", 
                     "0912345678", 
-                    "2026-07-15", 
-                    "15", 
-                    "2026-07-30", 
-                    "Phòng Kinh tế", 
-                    "Nguyễn Văn Toàn - Công chức Địa chính - Nông nghiệp", 
-                    "Đang xử lý", 
-                    "Nạp tự động mẫu thử nghiệm liên thông huyện."
+                    "2026-07-16", 
+                    "7", 
+                    "2026-07-23", 
+                    "Văn phòng Đất đai Thanh Chương", 
+                    "Lê Văn Tuấn", 
+                    "Đang xử lý"
                 ]
             ];
             
             try {
                 const ws = XLSX.utils.aoa_to_sheet(headers.concat(sampleRows));
                 const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "DanhSachHoSo_Mau");
-                XLSX.writeFile(wb, "Mau_Danh_Sach_Ho_So_TTHC_UBND.xlsx");
-                showToast("Đã tải xuống file mẫu Excel chuẩn thành công!", "success");
+                XLSX.utils.book_append_sheet(wb, ws, "DanhSachImport");
+                XLSX.writeFile(wb, "Mau_Excel_Nhap_TTHC.xlsx");
+                showToast("Đã tải tệp mẫu Excel!", "success");
             } catch (err) {
-                showToast("Lỗi khi kết xuất file Excel mẫu!", "error");
+                showToast("Lỗi xuất file mẫu!", "error");
             }
         }
 
@@ -1442,53 +1598,39 @@
                     const firstSheet = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheet];
                     
-                    // Convert raw cells to array representation
                     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
                     
                     if (jsonData.length <= 1) {
-                        showToast("Tệp tin trống hoặc không khớp định dạng cột dữ liệu mẫu!", "error");
+                        showToast("Tệp trống hoặc sai định dạng!", "error");
                         return;
                     }
 
                     tempExcelImportData = [];
-                    // Start from index 1 (skipping header)
                     for (let i = 1; i < jsonData.length; i++) {
                         const row = jsonData[i];
                         if (!row || row.length === 0) continue;
 
-                        // Required fields validation: Code [0], Name of TTHC [1], Citizen [3]
                         const code = String(row[0] || "").trim();
                         const tthcName = String(row[1] || "").trim();
                         const field = String(row[2] || "").trim();
                         const citizen = String(row[3] || "").trim();
                         
-                        if (!code || !tthcName || !citizen) continue; // Skip incomplete lines
+                        if (!code || !tthcName || !citizen) continue;
 
                         const phone = String(row[4] || "").trim();
-                        const dateRec = String(row[5] || "2026-07-15").trim();
+                        const dateRec = String(row[5] || "2026-07-16").trim();
                         const duration = parseInt(row[6]) || 1;
-                        const deadline = String(row[7] || "2026-07-16").trim();
+                        const deadline = String(row[7] || "2026-07-23").trim();
                         const dept = String(row[8] || "Văn phòng HĐND - UBND").trim();
                         const officer = String(row[9] || "Công chức Một cửa").trim();
                         const status = String(row[10] || "Đang xử lý").trim();
-                        const notes = String(row[11] || "Nhập hàng loạt từ tệp Excel.").trim();
 
                         tempExcelImportData.push({
                             id: "rec_excel_" + i + "_" + Date.now(),
-                            code,
-                            tthcName,
-                            field,
-                            citizen,
-                            phone,
-                            dateRec,
-                            duration,
-                            deadline,
-                            dept,
-                            officer,
-                            status,
-                            notes,
+                            code, tthcName, field, citizen, phone, dateRec, duration, deadline, dept, officer, status,
+                            currentStep: 1,
                             journal: [
-                                { date: "2026-07-15 16:15", text: "Hồ sơ được cập nhật hàng loạt tự động từ file Excel." }
+                                { date: "2026-07-16 11:30", text: "Hồ sơ được tạo tự động từ tệp Excel." }
                             ]
                         });
                     }
@@ -1498,15 +1640,13 @@
                     
                     if (tempExcelImportData.length > 0) {
                         document.getElementById("excelCommitBtn").disabled = false;
-                        showToast(`Đã đọc thành công ${tempExcelImportData.length} dòng hồ sơ!`, "success");
+                        showToast(`Đã đọc ${tempExcelImportData.length} dòng hồ sơ!`, "success");
                     } else {
                         document.getElementById("excelCommitBtn").disabled = true;
-                        showToast("Không tìm thấy dòng dữ liệu hợp lệ nào!", "error");
+                        showToast("Không có dữ liệu hợp lệ!", "error");
                     }
-
                 } catch (err) {
-                    showToast("Đã có lỗi xảy ra khi phân tích tệp Excel!", "error");
-                    console.error(err);
+                    showToast("Lỗi phân tích Excel!", "error");
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -1519,32 +1659,30 @@
             if (tempExcelImportData.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="6" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
+                        <td colspan="5" class="p-4 text-center text-slate-400 italic">Vui lòng tải tệp Excel lên để xem trước kết quả phân tích.</td>
                     </tr>
                 `;
                 return;
             }
 
-            // Show maximum 10 items for performance optimization preview
-            const previewSet = tempExcelImportData.slice(0, 10);
+            const previewSet = tempExcelImportData.slice(0, 5);
             previewSet.forEach(rec => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td class="p-2 border-b border-slate-100 font-bold text-slate-800">${rec.code}</td>
                     <td class="p-2 border-b border-slate-100 font-semibold">${rec.citizen}</td>
                     <td class="p-2 border-b border-slate-100 text-slate-500">${rec.field}</td>
-                    <td class="p-2 border-b border-slate-100 max-w-[200px] truncate" title="${rec.tthcName}">${rec.tthcName}</td>
                     <td class="p-2 border-b border-slate-100 text-slate-600 font-mono">${formatDate(rec.deadline)}</td>
                     <td class="p-2 border-b border-slate-100 text-emerald-800 font-medium">${rec.officer}</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            if (tempExcelImportData.length > 10) {
+            if (tempExcelImportData.length > 5) {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td colspan="6" class="p-2 text-center text-indigo-700 bg-indigo-50 font-semibold">
-                        ... Và ${tempExcelImportData.length - 10} dòng hồ sơ khác phía sau ...
+                    <td colspan="5" class="p-2 text-center text-indigo-700 bg-indigo-50 font-semibold">
+                        ... Và ${tempExcelImportData.length - 5} hồ sơ khác ...
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1553,23 +1691,25 @@
 
         function commitExcelImport() {
             if (tempExcelImportData.length === 0) return;
-
             const mode = document.querySelector('input[name="importMode"]:checked').value;
 
-            showCustomConfirm(`Đồng chí có chắc chắn muốn nạp ${tempExcelImportData.length} hồ sơ từ Excel vào hệ thống không?`, () => {
+            showCustomConfirm(`Đồng chí có chắc muốn nạp ${tempExcelImportData.length} hồ sơ vào hệ thống không?`, async () => {
+                let success = false;
                 if (mode === "replace") {
                     database = [...tempExcelImportData];
+                    success = await saveState(tempExcelImportData, 'bulk', 'replace');
                 } else {
-                    // Append mode: avoid duplicate codes by removing matching items first
                     const newCodes = tempExcelImportData.map(r => r.code);
                     database = database.filter(r => !newCodes.includes(r.code));
                     database = database.concat(tempExcelImportData);
+                    success = await saveState(tempExcelImportData, 'bulk', 'append');
                 }
 
-                saveState();
-                applyFilters();
-                closeExcelModal();
-                showToast(`Đã nạp thành công ${tempExcelImportData.length} hồ sơ vào bảng giám sát!`, "success");
+                if (success) {
+                    applyFilters();
+                    closeExcelModal();
+                    showToast(`Nạp thành công ${tempExcelImportData.length} hồ sơ!`, "success");
+                }
             });
         }
 
@@ -1611,43 +1751,60 @@
             
             const a = document.createElement("a");
             a.href = url;
-            a.download = `UBNDX_GiamSatTTHC_Backup_${new Date().toISOString().slice(0,10)}.json`;
+            a.download = `CaiTieng_GiamSatTTHC_Backup_${new Date().toISOString().slice(0,10)}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            showToast("Xuất dữ liệu lưu trữ (Backup) thành công!", "success");
+            showToast("Đã xuất bản sao lưu .json thành công!", "success");
         }
 
-        function importDatabase(event) {
+        async function importDatabase(event) {
             const file = event.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 try {
                     const imported = JSON.parse(e.target.result);
                     if (Array.isArray(imported)) {
                         database = imported;
-                        saveState();
-                        applyFilters();
-                        showToast("Khôi phục cơ sở dữ liệu từ file sao lưu thành công!", "success");
+                        const success = await saveState(imported, 'bulk', 'replace');
+                        if (success) {
+                            applyFilters();
+                            showToast("Đã khôi phục dữ liệu từ bản sao lưu!", "success");
+                        }
                     } else {
-                        showToast("Định dạng tệp sao lưu .json không hợp lệ!", "error");
+                        showToast("File sao lưu không hợp lệ!", "error");
                     }
                 } catch (err) {
-                    showToast("Lỗi trong quá trình đọc tệp dữ liệu sao lưu!", "error");
+                    showToast("Đọc file thất bại!", "error");
                 }
             };
             reader.readAsText(file);
         }
 
         function resetToMockData() {
-            showCustomConfirm("Đồng chí có chắc chắn muốn KHÔI PHỤC toàn bộ dữ liệu mẫu ban đầu theo biểu thủ tục chuẩn hóa?", () => {
+            showCustomConfirm("Khôi phục toàn bộ danh sách hồ sơ mẫu thử nghiệm?", async () => {
+                if (IS_SERVER_MODE) {
+                    try {
+                        const res = await fetch('/api/database/reset', { method: 'POST' });
+                        const json = await res.json();
+                        if (json.success) {
+                            database = json.data;
+                            applyFilters();
+                            buildStats();
+                            showToast("Khôi phục dữ liệu mẫu thành công!", "success");
+                            return;
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
                 database = [...mockRecords];
                 saveState();
                 applyFilters();
-                showToast("Khôi phục thành công dữ liệu mẫu từ tệp đính kèm!", "success");
+                showToast("Khôi phục dữ liệu mẫu thành công!", "success");
             });
         }
     </script>
